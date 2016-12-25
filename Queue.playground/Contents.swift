@@ -2,14 +2,15 @@
 
 public struct Queue<T> {
 
-    fileprivate var array = [T]()
+    fileprivate var array = [T?]()
+    fileprivate var head = 0
 
     public var isEmpty: Bool {
-        return array.isEmpty
+        return count == 0
     }
 
     public var count: Int {
-        return array.count
+        return array.count - head
     }
 
     public mutating func enqueue(_ element: T) {
@@ -18,15 +19,23 @@ public struct Queue<T> {
 
     public mutating func dequeue() -> T? {
 
-        if array.isEmpty {
-            return nil
-        } else {
-            return array.removeFirst()
+        guard head < array.count, let element = array[head] else { return nil }
+
+        array[head] = nil
+        head += 1
+
+        let percentage = Double(head)/Double(array.count)
+
+        if array.count > 50 && percentage > 0.25 {
+            array.removeFirst()
+            head = 0
         }
+
+        return element
     }
 
     public var front: T? {
         return array.first
     }
-
+    
 }
