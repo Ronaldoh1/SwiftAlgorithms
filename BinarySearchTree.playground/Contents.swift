@@ -109,6 +109,28 @@ public class BinarySearchTree<T: Comparable> {
         }
     }
 
+    // helper 
+    private func reconnectParentToNode(node: BinarySearchTree?) {
+        if let parent = parent {
+            if hasLeftChild {
+                parent.leftChild = node
+            } else {
+                parent.rightChild = node
+            }
+        }
+        node?.parent = parent
+    }
+
+    // finding minimum
+
+    public func minimum() -> BinarySearchTree {
+        var node = self
+        while case let next? = node.leftChild {
+            node = next
+        }
+        return node
+    }
+
 }
 
 
