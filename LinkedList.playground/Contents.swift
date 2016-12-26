@@ -94,5 +94,22 @@ public class LinkList<T> {
         return (prev, next)
     }
 
+    // inserting nodes
+
+    public func insert(value: T, atIndex index: Int) {
+        let (prev, next) = nodesBeforeAndAfter(index: index)
+
+        let newNode = Node(value: value)
+        newNode.previous = prev
+        newNode.next = next
+        prev?.next = newNode
+        next?.previous = newNode
+
+        if prev == nil {
+            head = newNode
+        }
+
+    }
+
 
 }
