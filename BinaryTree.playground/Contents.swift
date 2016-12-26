@@ -73,6 +73,6 @@ extension BinaryTree {
             process(value)
         }
     }
-    
+
 }
 
