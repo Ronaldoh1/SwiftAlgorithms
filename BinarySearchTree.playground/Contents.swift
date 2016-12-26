@@ -105,11 +105,11 @@ public class BinarySearchTree<T: Comparable> {
 extension BinarySearchTree: CustomStringConvertible {
     public var description: String {
         var s = ""
-        if let left = left {
+        if let left = leftChild {
             s += "(\(left.description)) <- "
         }
         s += "\(value)"
-        if let right = right {
+        if let right = rightChild {
             s += " -> (\(right.description))"
         }
         return s
