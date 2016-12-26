@@ -131,6 +131,80 @@ public class BinarySearchTree<T: Comparable> {
         return node
     }
 
+    public func maximum() -> BinarySearchTree {
+        var node = self
+        while case let next? = node.rightChild {
+            node = next
+        }
+        return node
+    }
+
+    public func remove() -> BinarySearchTree? {
+        let replacement: BinarySearchTree?
+
+        if let left = leftChild {
+            if let right = rightChild {
+                replacement = removeNodeWithTwoChildren(left: left, right)  // 1
+            } else {
+                replacement = left           // 2
+            }
+        } else if let right = rightChild {    // 3
+            replacement = right
+        } else {
+            replacement = nil              // 4
+        }
+
+        reconnectParentToNode(node: replacement)
+        
+        parent = nil
+        leftChild = nil
+        rightChild = nil
+        
+        return replacement
+    }
+
+    private func removeNodeWithTwoChildren(left: BinarySearchTree, _ right: BinarySearchTree) -> BinarySearchTree {
+        let successor = right.minimum()
+        successor.remove()
+
+        successor.leftChild = left
+        left.parent = successor
+
+        if right !== successor {
+            successor.rightChild = right
+            right.parent = successor
+        } else {
+            successor.rightChild = nil
+        }
+        
+        return successor
+    }
+
+    public func successor() -> BinarySearchTree<T>? {
+        if let right = rightChild {
+            return right.minimum()
+        } else {
+            var node = self
+            while case let parent? = node.parent {
+                if parent.value > value { return parent }
+                node = parent
+            }
+            return nil
+        }
+    }
+    public func predecessor() -> BinarySearchTree<T>? {
+        if let left = leftChild {
+            return left.maximum()
+        } else {
+            var node = self
+            while case let parent? = node.parent {
+                if parent.value < value { return parent }
+                node = parent
+            }
+            return nil
+        }
+    }
+
 }
 
 
