@@ -41,7 +41,7 @@ public struct Deque<T> {
         return array.first
     }
 
-    public var peekLast: T? {
+    public var peekBack: T? {
         return array.last
     }
     
