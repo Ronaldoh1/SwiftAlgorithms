@@ -111,5 +111,20 @@ public class LinkList<T> {
 
     }
 
+    public func remove(node: Node) -> T {
+        let prev = node.previous
+        let next = node.next
+
+        if let prev = prev {
+            prev.next = next
+        } else {
+            head = next
+        }
+        next?.previous = prev
+
+        node.previous = nil
+        node.next = nil
+        return node.value
+    }
 
 }
