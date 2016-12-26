@@ -15,3 +15,18 @@ public class LinkedListNode<T> {
     }
 
 }
+
+
+public class LinkList<T> {
+    public typealias Node = LinkedListNode<T>
+
+    public var head: Node?
+
+    public var isEmpty: Bool {
+        return head == nil
+    }
+
+    public var first: Node? {
+        return head
+    }
+}
