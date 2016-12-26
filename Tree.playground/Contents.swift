@@ -19,7 +19,21 @@ public class TreeNode<T> {
 }
 
 
+extension TreeNode where T: Equatable {
 
+    func search(_ value: T) -> TreeNode? {
+        if value == self.value {
+            return self
+        }
+
+        for child in children {
+            if child.value == value {
+                return child
+            }
+        }
+        return nil
+    }
+}
 
 
 
