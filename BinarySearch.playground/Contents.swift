@@ -32,4 +32,19 @@ func binarySearch(_ array: Array<Int>, key: Int) {
 
 }
 
-binarySearch([1,2,3,10], key: 10)
+binarySearch([1,2,3,10], key: 3)
+
+enum HouseType: String {
+    case appartment
+    case condo
+    case house
+}
+
+let houseType:HouseType = .condo
+
+switch houseType {
+case .condo:
+    print("the house type is condo")
+default:
+    break
+}
