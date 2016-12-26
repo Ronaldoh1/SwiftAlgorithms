@@ -76,4 +76,23 @@ public class LinkList<T> {
         }
         return nil
     }
+
+    private func nodesBeforeAndAfter(index: Int) -> (Node?, Node?) {
+        assert(index >= 0)
+
+        var i = index
+        var next = head
+        var prev: Node?
+
+        while next != nil && i > 0 {
+            i -= 1
+            prev = next
+            next = next!.next
+        }
+        assert(i == 0)
+
+        return (prev, next)
+    }
+
+
 }
