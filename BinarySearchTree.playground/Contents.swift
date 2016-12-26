@@ -1,10 +1,10 @@
 //: Implementation of Binary Search Tree 
 
-public class BinarySearchTree<T> {
+public class BinarySearchTree<T: Comparable> {
     private(set) public var parent: BinarySearchTree?
     private(set) public var leftChild: BinarySearchTree?
     private(set) public var rightChild: BinarySearchTree?
-    private(set) public var value: T?
+    private(set) public var value: T
 
     //need an initializer
 
@@ -61,5 +61,32 @@ public class BinarySearchTree<T> {
     public var count: Int {
         return (leftChild?.count ?? 00) + 1 + (rightChild?.count ?? 0)
     }
-    
+
+
+    //Inserting Nodes
+
+    public func insert(_ value: T) {
+        insert(value: value, parent: self)
+    }
+
+    public func insert(value: T, parent: BinarySearchTree) {
+        if value < self.value {
+            if let leftChild = self.leftChild {
+                leftChild.insert(value: value, parent: leftChild)
+            } else {
+                leftChild = BinarySearchTree(value: value)
+                leftChild?.parent = parent
+            }
+
+        } else {
+            if let rightChild = self.rightChild {
+                rightChild.insert(value: value, parent: rightChild)
+            } else {
+                rightChild = BinarySearchTree(value: value)
+                rightChild?.parent = parent
+            }
+
+        }
+    }
+
 }
