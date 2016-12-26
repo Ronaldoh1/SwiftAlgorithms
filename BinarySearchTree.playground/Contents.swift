@@ -12,6 +12,16 @@ public class BinarySearchTree<T: Comparable> {
         self.value = value
     }
 
+    // convinience initializer to add elements in an array to a tree. 
+
+    public convenience init(array: [T]) {
+        precondition(array.count > 0)
+        self.init(value: array.first!)
+        for value in array.dropFirst() {
+            self.insert(value: value, parent: self)
+        }
+    }
+
     //is it a root node? 
 
     public var isRootNode: Bool {
@@ -89,4 +99,19 @@ public class BinarySearchTree<T: Comparable> {
         }
     }
 
+}
+
+
+extension BinarySearchTree: CustomStringConvertible {
+    public var description: String {
+        var s = ""
+        if let left = left {
+            s += "(\(left.description)) <- "
+        }
+        s += "\(value)"
+        if let right = right {
+            s += " -> (\(right.description))"
+        }
+        return s
+    }
 }
