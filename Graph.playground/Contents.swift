@@ -50,3 +50,27 @@ for graph in [AdjacencyMatrixGraph<Int>(), AdjacencyListGraph<Int>()] {
     graph.addDirectedEdge(v2, to: v5, withWeight: 3.2)
     
 }
+
+
+//Breath First Search
+
+func breadthFirstSearch(_ graph: Graph, source: Node) -> [String] {
+    var queue = Queue<Node>()
+    queue.enqueue(source)
+
+    var nodesExplored = [source.label]
+    source.visited = true
+
+    while let node = queue.dequeue() {
+        for edge in node.neighbors {
+            let neighborNode = edge.neighbor
+            if !neighborNode.visited {
+                queue.enqueue(neighborNode)
+                neighborNode.visited = true
+                nodesExplored.append(neighborNode.label)
+            }
+        }
+    }
+    
+    return nodesExplored
+}
